@@ -1,7 +1,7 @@
 import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
 import {SearchParams} from "next/dist/server/request/search-params";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 
 export default async function Home({ searchParams}: {
     searchParams: Promise<{ query?: string }>

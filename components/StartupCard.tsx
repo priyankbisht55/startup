@@ -3,21 +3,10 @@ import {EyeIcon} from "lucide-react";
 import {cn, formatDate} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import Image from "next/image";
+// @ts-ignore
+import { Author, Startup } from "@/sanity/types";
 
-type StartupTypeCard = {
-    _createdAt: string;
-    views: number;
-    author: {
-        id: string;
-        name: string;
-    };
-    title: string;
-    category: string;
-    _id: string;
-    image: string;
-    description: string;
-};
-
+export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
 const StartupCard = ({ post }: {post: StartupTypeCard}) => {
     const { _createdAt, views, author: { id: authorId, name }, title, category, _id, image, description } = post;
