@@ -1,9 +1,14 @@
 import React from 'react';
 import { auth, signOut, signIn } from "@/auth";
+import Link from "next/link";
+import Image from "next/image";
+import { BadgePlus, LogOut } from "lucide-react";
+
 
 const Navbar = async () => {
     const session = await auth();
     
+    // @ts-ignore
     return(
         <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
             <nav className="flex justify-between items-center">
@@ -32,7 +37,7 @@ const Navbar = async () => {
                                 </button>
                             </form>
                         </>
-                    )}
+                    ): null}
                 </div>
             </nav>
         </header>
