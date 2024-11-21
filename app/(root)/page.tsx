@@ -3,15 +3,15 @@ import SearchForm from "@/components/SearchForm";
 import {SearchParams} from "next/dist/server/request/search-params";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 import {STARTUPS_QUERY} from "@/sanity/lib/queries";
-import { client } from "@/sanity/lib/client";
+import {sanityFetch, SanityLive } from "@/sanity/lib/live";
+
 
 export default async function Home({ searchParams}: {
     searchParams: Promise<{ query?: string }>
 }) {
     const query = (await searchParams).query;
-
-    const posts = await client.fetch(STARTUPS_QUERY);
-    console.log(JSON.stringify(posts, null, 2));
+    const params = { search: query || null }
+    const { data: posts } = await sanityFetch({query: STARTUPS_QUERY, params});
 
 
     return(
@@ -44,6 +44,7 @@ export default async function Home({ searchParams}: {
                     )}
                 </ul>
             </section>
+            <SanityLive />
         </>
     );
 }
