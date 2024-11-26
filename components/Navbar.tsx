@@ -36,8 +36,22 @@ const Navbar = async () => {
                                     <LogOut className="size-6 sm:hidden text-red-500" />
                                 </button>
                             </form>
+
+                            <Link href={`/user/${session?.id}`}>
+                                <span>{session?.user?.name}</span>
+                            </Link>
                         </>
-                    ): null}
+                    ): (
+                        <form action={async () =>{
+                            "use server";
+
+                            await signIn('github');
+                        }}>
+                            <button type="submit">
+                                Login
+                            </button>
+                        </form>
+                    )}
                 </div>
             </nav>
         </header>
