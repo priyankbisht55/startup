@@ -3,12 +3,12 @@ import { auth, signOut, signIn } from "@/auth";
 import Link from "next/link";
 import Image from "next/image";
 import { BadgePlus, LogOut } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 
 const Navbar = async () => {
     const session = await auth();
-    
-    // @ts-ignore
+
     return(
         <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
             <nav className="flex justify-between items-center">
@@ -38,7 +38,13 @@ const Navbar = async () => {
                             </form>
 
                             <Link href={`/user/${session?.id}`}>
-                                <span>{session?.user?.name}</span>
+                                <Avatar className="size-10">
+                                    <AvatarImage
+                                        src={session?.user?.image || ""}
+                                        alt={session?.user?.name || ""}
+                                    />
+                                    <AvatarFallback>AV</AvatarFallback>
+                                </Avatar>
                             </Link>
                         </>
                     ): (

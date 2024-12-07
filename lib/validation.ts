@@ -6,13 +6,13 @@ export const formSchema = z.object({
     category: z.string().min(3).max(20),
     link: z
         .string()
-        .url
+        .url()
         .refine(async (url) => {
-            try{
-                const res = await fetch(url, {method: "HEAD" });
-                const consentType = res.headers.get("content-type");
+            try {
+                const res = await fetch(url, { method: "HEAD" });
+                const contentType = res.headers.get("content-type");
 
-                return consentType?.startsWith("image/");
+                return contentType?.startsWith("image/");
             } catch {
                 return false;
             }
